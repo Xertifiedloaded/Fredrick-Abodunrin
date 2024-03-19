@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../style-module/article.module.css';
 import { articleData } from '../utils';
 import { Link } from 'react-router-dom';
 import chevron from '../assets/chevron-left.svg'
 export default function Article() {
-    const [articles, setArticles] = useState(articleData);
+
+
+
+ 
+
+
+    const [articles, setArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [articlesPerPage] = useState(3);
 
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
     const currentArticles = articles.slice(indexOfFirstArticle, indexOfLastArticle);
+
+    const apiUrl = import.meta.env.VITE_BLOG
+
 
   
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -32,6 +41,28 @@ export default function Article() {
         startPage = Math.max(1, endPage - maxPagesToShow + 1);
     }
 
+    useEffect(() => {
+        fetchProjectData();
+    }, []);
+
+    const fetchProjectData = async () => {
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Failed to fetch project data');
+            }
+            const data = await response.json();
+            setArticles(data.articles)
+        
+        
+        } catch (error) {
+            console.error('Error fetching project data:', error);
+        }
+    };
+
+
+
+
     return (
         <>
             <article>
@@ -41,9 +72,9 @@ export default function Article() {
                     {currentArticles.map((article) => {
                         return (
                             <div key={article.id} className={styles.blog}>
-                                <p>{article.publicationDate}</p>
+                                <p>{article.createdAt}</p>
                                 <div className={styles.articleContent}>
-                                    <h3>{article.title}</h3>
+                                    <h3>{article.blogTitle}</h3>
                                     <p>{article.headline}</p>
                                     <Link to={`/article/${article.id}/${article.title}`}>Read more <img style={{width:'10px',height:"10px"}} src={chevron} alt="" /></Link>
                                 </div>

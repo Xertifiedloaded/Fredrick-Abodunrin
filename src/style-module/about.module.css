@@ -20,7 +20,7 @@
             }
 
             .glow {
-                margin: 10px 0;
+                margin: 20px 0;
 
                 .button {
                     width: 150px;
@@ -144,7 +144,7 @@
                 flex-direction: column-reverse;
 
 
-                .group {}
+            
 
                 .image_Container {
                     width: 100%;
@@ -158,6 +158,9 @@
                     }
                 }
 
+            }
+            .glow{
+         display: inline-block;
             }
         }
 

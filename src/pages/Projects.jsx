@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../style-module/project.module.css'
 import { projectData } from '../utils'
 import chain from '../assets/link.svg'
@@ -6,24 +6,26 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 axios.defaults.withCredentials=true
 export default function Projects() {
+    const apiUrl = import.meta.env.VITE_PROJECTS;
+const [data,setData]=useState([])
+    useEffect(() => {
+        fetchProjectData();
+    }, []);
 
-    // useEffect(() => {
-    //     fetchProjectData();
-    // }, []);
-
-    // const fetchProjectData = async () => {
-    //     try {
-    //         const response = await fetch('https://portfolio-fwd9.onrender.com/api/articles/get');
-    //         if (!response.ok) {
-    //             throw new Error('Failed to fetch project data');
-    //         }
-    //         const data = await response.json();
-    //         console.log(data);
+    const fetchProjectData = async () => {
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Failed to fetch project data');
+            }
+            const data = await response.json();
+            setData(data.portfolios)
+            // console.log(data.portfolios);
         
-    //     } catch (error) {
-    //         console.error('Error fetching project data:', error);
-    //     }
-    // };
+        } catch (error) {
+            console.error('Error fetching project data:', error);
+        }
+    };
     return (
         <>
             <section className={styles.projects}>
@@ -39,7 +41,7 @@ export default function Projects() {
                 </div>
                 <div className={styles.card_container}>
                     {
-                        projectData.map((project) => {
+                        data.map((project) => {
                             return (
                                 <div key={project.id} className={styles.card}>
                                     <div className={styles.card_Image_Container}>
@@ -50,7 +52,7 @@ export default function Projects() {
                                         <p>{project.content}</p>
                                     </div>
                                     <div className={styles.navigate}>
-                                        <img src={chain} alt="" />
+                                        <img src={project.icon} alt="" />
                                         <Link to={project.github}>
                                             Github
                                         </Link>
