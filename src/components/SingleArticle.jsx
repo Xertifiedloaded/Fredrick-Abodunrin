@@ -1,28 +1,37 @@
-import React from 'react'
-import styles from '../style-module/singleArticle.module.css'
-import { useNavigate, useParams } from 'react-router-dom'
-import back from '../assets/back-button.png'
-import xerty from '../assets/ai.jpeg'
-import { articleData } from '../utils'
+import React, { useState, useEffect } from 'react';
+import styles from '../style-module/singleArticle.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import back from '../assets/back-button.png';
+import xerty from '../assets/ai.jpeg';
 
 export default function SingleArticle() {
-    const { id, title } = useParams()
-    const article = articleData.find(article => article.id.toString() === id && article.title === title);
+    const { id } = useParams();
+    const [article, setArticle] = useState(null);
+    const navigate = useNavigate();
+   
+    useEffect(() => {
+        const apiUrl = `${import.meta.env.VITE_ARTICLE_BY_ID}/${id}`
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => setArticle(data.article))
+
+            .catch(error => console.error('Error fetching article:', error));
+    }, [id]);
+    // console.log(article);
+    const handleNavigate = () => {
+        navigate("/articles");
+    };
 
     if (!article) {
-        return <div>Article not found.</div>;
+        return <div>Loading...</div>;
     }
 
-const navigate =useNavigate()
-const handleNavigate=()=>{
-    navigate("/articles")
-}
     return (
         <>
             <section className={styles.single}>
                 <p className={styles.clock}>{article.publicationDate}</p>
                 <div onClick={handleNavigate} className={styles.navigation}>
-                    <img  src={back} alt="" />
+                    <img src={back} alt="" />
                 </div>
                 <div className={styles.details}>
                     <div className={styles.articlesss}>
@@ -45,8 +54,7 @@ const handleNavigate=()=>{
                 <div className={styles.content}>
                     <p>{article.content}</p>
                 </div>
-
             </section>
         </>
-    )
+    );
 }

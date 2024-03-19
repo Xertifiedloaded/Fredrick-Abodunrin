@@ -43,7 +43,7 @@ function App() {
           element: <Article/>,
         },
         {
-          path: "/article/:id/:title",
+          path: "/article/post/:id",
           element: <SingleArticle/>,
         },
        

@@ -6,7 +6,7 @@ import chevron from '../assets/chevron-left.svg'
 export default function Article() {
 
 
-
+const [loading,setLoadin]=useState(true)
  
 
 
@@ -53,14 +53,22 @@ export default function Article() {
             }
             const data = await response.json();
             setArticles(data.articles)
+            setLoadin(false)
         
         
         } catch (error) {
+            setLoadin(false)
             console.error('Error fetching project data:', error);
         }
     };
 
-
+    if (loading) {
+        return (
+            <div style={{display:"grid",placeItems:"center",height:"100vh"}}>
+                <p style={{fontSize:"40px"}}>Loading...</p>
+            </div>
+        ); 
+    }
 
 
     return (
@@ -71,12 +79,12 @@ export default function Article() {
                 <div className={styles.article}>
                     {currentArticles.map((article) => {
                         return (
-                            <div key={article.id} className={styles.blog}>
+                            <div key={article._id} className={styles.blog}>
                                 <p>{article.createdAt}</p>
                                 <div className={styles.articleContent}>
                                     <h3>{article.blogTitle}</h3>
                                     <p>{article.headline}</p>
-                                    <Link to={`/article/${article.id}/${article.title}`}>Read more <img style={{width:'10px',height:"10px"}} src={chevron} alt="" /></Link>
+                                    <Link to={`/article/post/${article._id}`}>Read more <img style={{width:'10px',height:"10px"}} src={chevron} alt="" /></Link>
                                 </div>
                             </div>
                         );

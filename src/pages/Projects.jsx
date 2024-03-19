@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 axios.defaults.withCredentials=true
 export default function Projects() {
+    const [loading,setLoadin]=useState(true)
     const apiUrl = import.meta.env.VITE_PROJECTS;
 const [data,setData]=useState([])
     useEffect(() => {
@@ -20,12 +21,21 @@ const [data,setData]=useState([])
             }
             const data = await response.json();
             setData(data.portfolios)
+            setLoadin(false)
             // console.log(data.portfolios);
         
         } catch (error) {
+            setLoadin(false)
             console.error('Error fetching project data:', error);
         }
     };
+    if (loading) {
+        return (
+            <div style={{display:"grid",placeItems:"center",height:"100vh"}}>
+                <p style={{fontSize:"40px"}}>Loading...</p>
+            </div>
+        ); 
+    }
     return (
         <>
             <section className={styles.projects}>
@@ -43,7 +53,7 @@ const [data,setData]=useState([])
                     {
                         data.map((project) => {
                             return (
-                                <div key={project.id} className={styles.card}>
+                                <div key={project._id} className={styles.card}>
                                     <div className={styles.card_Image_Container}>
                                         <img src={project.icon} alt="" />
                                     </div>
