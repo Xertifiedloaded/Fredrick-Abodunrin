@@ -1,0 +1,33 @@
+.contact {
+    color: #65656d;
+
+    h1 {
+        font-size: 35px;
+        margin: 20px 0;
+
+    }
+
+    p {
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    .social_connection {
+        font-size: 14px;
+        font-weight: 600;
+
+        .social_List {
+            display: flex;
+            color: #65656d;
+            gap: 10px;
+            margin: 30px 0;
+            align-items: center;
+
+            img {
+                width: 15px;
+                height: 15px;
+            }
+
+        }
+    }
+}

@@ -1,0 +1,177 @@
+.mySection {
+
+
+    .profile {
+        margin-top: 150px;
+
+        .name_container {
+            h1 {
+                font-size: 40px;
+                background-image: url(../assets/freed.jpg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-clip: text;
+                color: transparent;
+            }
+
+            p {
+                padding: 5px 0;
+
+            }
+
+            .glow {
+                margin: 10px 0;
+
+                .button {
+                    width: 150px;
+                    height: 40px;
+                    background: black;
+                    color: white;
+                    border: 1px solid transparent;
+                    outline: none;
+                    font-size: 15px;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 0;
+                    border-radius: 10px;
+                }
+
+                .button:before {
+                    content: '';
+                    border-radius: 10px;
+                    border: 1px solid #fff;
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    right: -5px;
+                    bottom: -5px;
+                    z-index: -1;
+                    animation: glowing 2s infinite alternate;
+                }
+
+                @keyframes glowing {
+                    0% {
+                        border-color: #fff;
+                    }
+
+                    100% {
+                        border-color: #00ffd5;
+                    }
+                }
+
+
+            }
+        }
+
+        .proficiency {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            .group {
+
+                p {
+                    font-size: 18px;
+                    padding: 10px 0 2px;
+                    text-transform: capitalize;
+                }
+
+                ul {
+                    li {
+                        font-size: 14px;
+                        margin: 20px 0;
+                        color: #5f9ea0;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            .image_Container {
+                width: 50%;
+                height: 100%;
+                text-align: center;
+                display: inline-block;
+                overflow: hidden;
+
+
+                img {
+                    border-radius: 100%;
+                    width: 350px;
+                    height: 350px;
+                }
+            }
+
+        }
+    }
+
+    .summary {
+        width: 50%;
+        padding: 0 0 40px;
+
+        p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 2;
+        }
+    }
+}
+
+@media (width<768px) {
+
+    .mySection {
+
+
+        .profile {
+
+            margin-top: 50px;
+
+            .name_container {
+                text-align: center;
+
+                h1 {
+                    font-size: 30px;
+
+                }
+
+                p {
+                    padding: 10px 0;
+
+                }
+            }
+
+            .proficiency {
+                flex-direction: column-reverse;
+
+
+                .group {}
+
+                .image_Container {
+                    width: 100%;
+                    text-align: center;
+                    display: inline-block;
+                    overflow: hidden;
+
+                    img {
+                        width: 300px;
+                        height: 300px;
+                    }
+                }
+
+            }
+        }
+
+        .summary {
+            width: 100%;
+
+            p {
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 2;
+            }
+        }
+    }
+
+
+
+}

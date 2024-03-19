@@ -1,0 +1,32 @@
+footer {
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+    align-items: center;
+    justify-content: center;
+        padding-top: 20px;
+
+        li {
+            a {
+                color: black;
+                font-weight: 500;
+            }
+        }
+    }
+}
+@media (width<768px){
+    footer{
+        text-align: center;
+       display: block;
+       ul{
+        margin-bottom: 20px;
+        text-align: center;
+       }
+    }
+}
