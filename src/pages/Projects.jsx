@@ -62,7 +62,7 @@ const [data,setData]=useState([])
                                         <p>{project.content}</p>
                                     </div>
                                     <div className={styles.navigate}>
-                                        <img src={project.icon} alt="" />
+                                        <img src={chain} alt="" />
                                         <Link to={project.github}>
                                             Github
                                         </Link>
