@@ -61,7 +61,13 @@
 
     .single {
 
-
+.navigation{
+    margin-bottom: 20px;
+    img{
+        width: 30px;
+        height: 30px;
+    }
+}
         .details {
             display: flex;
             justify-content: space-between;

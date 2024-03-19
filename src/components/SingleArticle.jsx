@@ -23,13 +23,15 @@ export default function SingleArticle() {
     };
 
     if (!article) {
-        return <div>Loading...</div>;
+        return  <div style={{display:"grid",placeItems:"center",height:"100vh"}}>
+        <p style={{fontSize:"40px"}}>Loading...</p>
+    </div>
     }
 
     return (
         <>
             <section className={styles.single}>
-                <p className={styles.clock}>{article.publicationDate}</p>
+                <p className={styles.clock}>{article.createdAt}</p>
                 <div onClick={handleNavigate} className={styles.navigation}>
                     <img src={back} alt="" />
                 </div>
